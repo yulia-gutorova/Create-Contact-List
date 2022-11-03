@@ -1,0 +1,121 @@
+*{
+    box-sizing: border-box;
+}
+  
+.header {
+    background-color: rgb(5, 5, 87);
+    padding: 30px 40px;
+    color: white;
+    min-height: 250px;
+} 
+
+h1{
+ text-align: center;
+}  
+
+#error-message{
+    padding-top: 20px;
+    color: red;
+    font-weight: bold;
+    display: none; 
+    font-size: 20px;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    cursor: pointer;
+    padding: 5px;
+    background: rgb(194, 193, 193);
+    font-size: 15px;
+    transition: 0.2s;
+}  
+
+ul li:nth-child(odd) {
+    background: #e2dfdf;
+}
+
+ul li:hover {
+    background: rgb(225, 224, 224);
+}
+
+input {
+    margin: 0;
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+input:disabled{
+    background-color:#f5f3f3;
+} 
+
+button {
+    padding: 8px;   
+    background: #d9d9d9;
+    width: 120px;
+    color: rgb(83, 81, 81);
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+    margin: 5px;
+    border-color: gray;   
+}
+
+button:hover{
+    background-color: rgb(135, 135, 135);
+    color: white;
+}
+
+
+/**************************************************************
+*************************   MEDIA QUERIES  ********************
+***************************************************************/
+
+/*-------------------------------------------------------------
+/*                         Large desktops
+--------------------------------------------------------------*/
+
+@media screen and (min-width: 1200px)
+{
+}
+
+/*-------------------------------------------------------------
+/*                         Small desktops
+--------------------------------------------------------------*/
+
+@media screen and (max-width: 1200px)
+{
+}
+
+/*-------------------------------------------------------------
+/*                          TABLETS  
+--------------------------------------------------------------*/ 
+
+@media screen and (max-width: 825px)
+{
+    input {
+
+        border-radius: 10px;
+        width: 45%;
+    }
+}
+
+/*-------------------------------------------------------------
+/*                          MOBILES 
+--------------------------------------------------------------*/ 
+
+@media screen and (max-width: 767px)
+{
+    input {
+        width: 90%;
+    }
+}
