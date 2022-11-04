@@ -58,7 +58,7 @@ input:disabled{
 } 
 
 input.empty{
-    background: rgb(245, 218, 218);
+    background: rgb(243, 177, 177);
 }
 
 button {

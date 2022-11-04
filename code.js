@@ -15,6 +15,11 @@ createButton.addEventListener("click", function(){
 
     // if contact is empty
     if (name == '' || phone == '') {
+
+        if (name == ''){nameInput.classList.add("empty")}
+        if (phone == ''){phoneInput.classList.add("empty")}
+
+
         //show an error message
         errorMessage.innerHTML = 'Får ej skapa tom kontakt';
         errorMessage.style.display = 'block';
@@ -22,6 +27,11 @@ createButton.addEventListener("click", function(){
 
     // if contact is not empty
     else {
+
+        if (nameInput.classList.contains("empty")){nameInput.classList.remove("empty")}
+        if (phoneInput.classList.contains("empty")){phoneInput.classList.remove("empty")}
+
+
         errorMessage.style.display = 'none';
 
         //create a new li element
@@ -89,14 +99,24 @@ createButton.addEventListener("click", function(){
            else{
 
 
-                //if contakt is empty
+                //if contact is empty
                 if (listItem.children[0].value == '' || listItem.children[1].value == '') {
+                    
+                    if (listItem.children[0].value == ''){listItem.children[0].classList.add("empty")}
+                    if (listItem.children[1].value == ''){listItem.children[1].classList.add("empty")}
+                    
+                    
                     //show an error message
                     errorMessage.innerHTML = 'Får ej spara tom kontakt';
                     errorMessage.style.display = 'block';
                 }
                  
                 else{
+
+                    if (listItem.children[0].classList.contains("empty")){listItem.children[0].classList.remove("empty")}
+                    if (listItem.children[1].classList.contains("empty")){listItem.children[1].classList.remove("empty")}
+
+
                     //add an event listener for the change (Ändra) button 
                     //to make input fields disabled and save new values   
                         listItem.children[0].disabled = true;    
