@@ -5,9 +5,21 @@ let removeListButton = document.querySelector("#remove-all-list");
 let ulContactList = document.querySelector("#contact-list");
 let errorMessage = document.querySelector("#error-message");
 
+
+//-------------------------------------------------------------------------- start of remove button listener   
+ //add an event listener for the remove list (Radera lista) button
+ removeListButton.addEventListener('click', function(){  
+    
+    errorMessage.style.display = 'none';
+    ulContactList.innerHTML = '';
+
+})
+//--------------------------------------------------------------------------  end of remove button listener  
+
 //-------------------------------------------------------------------------- start of create button listener  
 //add an event listener for the create (Skapa) button
 createButton.addEventListener("click", function(){
+
     let name = nameInput.value;
     let phone = phoneInput.value;
     console.log('Name: ' + name);
@@ -16,9 +28,9 @@ createButton.addEventListener("click", function(){
     // if contact is empty
     if (name == '' || phone == '') {
 
+        //add a new class 'empty' to mark an emty contact
         if (name == ''){nameInput.classList.add("empty")}
         if (phone == ''){phoneInput.classList.add("empty")}
-
 
         //show an error message
         errorMessage.innerHTML = 'Får ej skapa tom kontakt';
@@ -28,9 +40,9 @@ createButton.addEventListener("click", function(){
     // if contact is not empty
     else {
 
+        //delete class 'empty' if contact is not empty
         if (nameInput.classList.contains("empty")){nameInput.classList.remove("empty")}
         if (phoneInput.classList.contains("empty")){phoneInput.classList.remove("empty")}
-
 
         errorMessage.style.display = 'none';
 
@@ -95,16 +107,15 @@ createButton.addEventListener("click", function(){
                 listItem.children[0].disabled = false;    
                 listItem.children[1].disabled = false;
             }
-           // if enabled, disable 
+           // if enabled, disable           
            else{
-
 
                 //if contact is empty
                 if (listItem.children[0].value == '' || listItem.children[1].value == '') {
                     
+                    //add a new class 'empty' to mark an emty contact
                     if (listItem.children[0].value == ''){listItem.children[0].classList.add("empty")}
                     if (listItem.children[1].value == ''){listItem.children[1].classList.add("empty")}
-                    
                     
                     //show an error message
                     errorMessage.innerHTML = 'Får ej spara tom kontakt';
@@ -113,9 +124,9 @@ createButton.addEventListener("click", function(){
                  
                 else{
 
+                    //delete class 'empty' if contact is not empty
                     if (listItem.children[0].classList.contains("empty")){listItem.children[0].classList.remove("empty")}
                     if (listItem.children[1].classList.contains("empty")){listItem.children[1].classList.remove("empty")}
-
 
                     //add an event listener for the change (Ändra) button 
                     //to make input fields disabled and save new values   
@@ -129,15 +140,7 @@ createButton.addEventListener("click", function(){
 })
 //-------------------------------------------------------------------------- end of create button listener   
 
-//--------------------------------------------------------------------------  
- //add an event listener for the remove list (Radera lista) button
-removeListButton.addEventListener('click', function(){  
-    
-    errorMessage.style.display = 'none';
-    ulContactList.innerHTML = '';
 
-})
-//--------------------------------------------------------------------------  
 
 
 
