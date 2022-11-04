@@ -59,6 +59,14 @@ createButton.addEventListener("click", function(){
         buttonDeleteContact.addEventListener("click", function(){         
             //get the parent of the delete button(li) 
             let listItem = this.parentNode;
+
+            console.log('Inside radera finction')
+            console.log(listItem.children[0].value)
+            console.log(listItem.children[1].value)
+            if (listItem.children[0].value == '' || listItem.children[1].value == '') {
+                errorMessage.style.display = 'none';
+            }
+
             listItem.remove();    
           });
 //--------------------------------------------------------------------------  end of delete button listener  
@@ -70,8 +78,6 @@ createButton.addEventListener("click", function(){
             errorMessage.style.display = 'none';
 
             let listItem = this.parentNode;
-            console.log ('Disable|Enable')
-            console.log (listItem.children[0].disabled)
 
             //if disabled, enable
             if (listItem.children[0].disabled && listItem.children[1].disabled){
@@ -79,14 +85,17 @@ createButton.addEventListener("click", function(){
                 listItem.children[0].disabled = false;    
                 listItem.children[1].disabled = false;
             }
-           // if enable, disable 
+           // if enabled, disable 
            else{
+
+
                 //if contakt is empty
                 if (listItem.children[0].value == '' || listItem.children[1].value == '') {
                     //show an error message
                     errorMessage.innerHTML = 'Får ej spara tom kontakt';
                     errorMessage.style.display = 'block';
-                } 
+                }
+                 
                 else{
                     //add an event listener for the change (Ändra) button 
                     //to make input fields disabled and save new values   
@@ -102,8 +111,11 @@ createButton.addEventListener("click", function(){
 
 //--------------------------------------------------------------------------  
  //add an event listener for the remove list (Radera lista) button
-removeListButton.addEventListener('click', function(){   
+removeListButton.addEventListener('click', function(){  
+    
+    errorMessage.style.display = 'none';
     ulContactList.innerHTML = '';
+
 })
 //--------------------------------------------------------------------------  
 

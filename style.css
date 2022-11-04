@@ -42,6 +42,7 @@ ul li:hover {
     background: rgb(225, 224, 224);
 }
 
+
 input {
     margin: 0;
     border: none;
@@ -55,6 +56,10 @@ input {
 input:disabled{
     background-color:#f5f3f3;
 } 
+
+input.empty{
+    background: rgb(245, 218, 218);
+}
 
 button {
     padding: 8px;   
