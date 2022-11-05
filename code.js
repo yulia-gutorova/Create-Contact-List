@@ -25,12 +25,17 @@ createButton.addEventListener("click", function(){
     console.log('Name: ' + name);
     console.log('Phone: ' + phone);
 
+
     // if contact is empty
     if (name == '' || phone == '') {
 
         //add a new class 'empty' to mark an emty contact
         if (name == ''){nameInput.classList.add("empty")}
         if (phone == ''){phoneInput.classList.add("empty")}
+
+         //umnark not empty contact
+        if (!name == ''){nameInput.classList.remove("empty")}
+        if (!phone == ''){phoneInput.classList.remove("empty")}
 
         //show an error message
         errorMessage.innerHTML = 'Får ej skapa tom kontakt';
@@ -41,8 +46,10 @@ createButton.addEventListener("click", function(){
     else {
 
         //delete class 'empty' if contact is not empty
+
         if (nameInput.classList.contains("empty")){nameInput.classList.remove("empty")}
         if (phoneInput.classList.contains("empty")){phoneInput.classList.remove("empty")}
+
 
         errorMessage.style.display = 'none';
 
@@ -116,6 +123,10 @@ createButton.addEventListener("click", function(){
                     //add a new class 'empty' to mark an emty contact
                     if (listItem.children[0].value == ''){listItem.children[0].classList.add("empty")}
                     if (listItem.children[1].value == ''){listItem.children[1].classList.add("empty")}
+
+                    //umnark not empty contact
+                    if (!listItem.children[0].value == ''){listItem.children[0].classList.remove("empty")}
+                    if (!listItem.children[1].value == ''){listItem.children[1].classList.remove("empty")}
                     
                     //show an error message
                     errorMessage.innerHTML = 'Får ej spara tom kontakt';
