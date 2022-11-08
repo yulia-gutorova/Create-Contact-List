@@ -5,14 +5,10 @@ let removeListButton = document.querySelector("#remove-all-list");
 let ulContactList = document.querySelector("#contact-list");
 let errorMessage = document.querySelector("#error-message");
 
-
 //-------------------------------------------------------------------------- start of remove button listener   
  //add an event listener for the remove list (Radera lista) button
  removeListButton.addEventListener('click', function(){  
-    
-    errorMessage.style.display = 'none';
-    ulContactList.innerHTML = '';
-
+    removeAllList()
 })
 //--------------------------------------------------------------------------  end of remove button listener  
 
@@ -20,33 +16,26 @@ let errorMessage = document.querySelector("#error-message");
 //add an event listener for the create (Skapa) button
 createButton.addEventListener("click", function(){
 
-    let name = nameInput.value;
+      let name = nameInput.value;
     let phone = phoneInput.value;
-    console.log('Name: ' + name);
-    console.log('Phone: ' + phone);
-
 
     // if contact is empty
-    if (name == '' || phone == '') {
+    if (name.trim() == '' || phone.trim() == '') {
 
         //add a new class 'empty' to mark an emty contact or umnark not empty contact
-        if (name == ''){
+        if (name.trim() == ''){
             nameInput.classList.add("empty")
         }
         else {
             nameInput.classList.remove("empty")
         }
 
-        if (phone == ''){
+        if (phone.trim() == ''){
             phoneInput.classList.add("empty")
         }
         else {
             phoneInput.classList.remove("empty")
         }
-
-         //umnark not empty contact
-        //if (!name == ''){nameInput.classList.remove("empty")}
-        //if (!phone == ''){phoneInput.classList.remove("empty")}
 
         //show an error message
         errorMessage.innerHTML = 'Får ej skapa tom kontakt';
@@ -60,7 +49,6 @@ createButton.addEventListener("click", function(){
 
         if (nameInput.classList.contains("empty")){nameInput.classList.remove("empty")}
         if (phoneInput.classList.contains("empty")){phoneInput.classList.remove("empty")}
-
 
         errorMessage.style.display = 'none';
 
@@ -85,99 +73,119 @@ createButton.addEventListener("click", function(){
         buttonDeleteContact.innerText = "Radera";
 
         newLi.append(contactName, contactPhone, buttonChangeContact, buttonDeleteContact);
-        newLi.classList.add('contact');
    
         // add a new li element in existing ul element
         ulContactList.appendChild(newLi);
 
         //Make input fields empty
         nameInput.value = '';
-        phoneInput.value = '';
+        phoneInput.value = ''; 
 
 //-------------------------------------------------------------------------- start of delete button listener         
         //add an event listener for the delete (Radera) button
-        buttonDeleteContact.addEventListener("click", function(){         
-            //get the parent of the delete button(li) 
-            let listItem = this.parentNode;
-
-            console.log('Inside radera finction')
-            console.log(listItem.children[0].value)
-            console.log(listItem.children[1].value)
-            if (listItem.children[0].value == '' || listItem.children[1].value == '') {
-                errorMessage.style.display = 'none';
-            }
-
-            listItem.remove();    
+        buttonDeleteContact.addEventListener("click", function(e){  
+            removeContact(e);      
           });
 //--------------------------------------------------------------------------  end of delete button listener  
 
 //--------------------------------------------------------------------------  start of change button listener  
         //add an event listener for the change (Ändra) button
-        buttonChangeContact.addEventListener("click", function(){
-          
-            errorMessage.style.display = 'none';
-
-            let listItem = this.parentNode;
-
-            //if disabled, enable
-            if (listItem.children[0].disabled && listItem.children[1].disabled){
-                //make input fields enabled
-                listItem.children[0].disabled = false;    
-                listItem.children[1].disabled = false;
-            }
-           // if enabled, disable           
-           else{
-
-                //if contact is empty mark it, if not emty unmark
-                if (listItem.children[0].value == '' || listItem.children[1].value == '') {
-                    
-                    //add a new class 'empty' to mark an emty contact
-                    if (listItem.children[0].value == ''){
-                        listItem.children[0].classList.add("empty")
-                    }
-                    else {
-                        listItem.children[0].classList.remove("empty")
-                    }
-                    if (listItem.children[1].value == ''){
-                        listItem.children[1].classList.add("empty")
-                    }
-                    else{
-                        listItem.children[1].classList.remove("empty")
-                    }
-
-                    //umnark not empty contact
-                    //if (!listItem.children[0].value == ''){listItem.children[0].classList.remove("empty")}
-                    //if (!listItem.children[1].value == ''){listItem.children[1].classList.remove("empty")}
-                    
-                    //show an error message
-                    errorMessage.innerHTML = 'Får ej spara tom kontakt';
-                    errorMessage.style.display = 'block';
-                }
-                 
-                else{
-
-                    //delete class 'empty' 
-                    if (listItem.children[0].classList.contains("empty")){
-                        listItem.children[0].classList.remove("empty")
-                    }
-
-                    if (listItem.children[1].classList.contains("empty")){
-                        listItem.children[1].classList.remove("empty")
-                    }
-
-                    //add an event listener for the change (Ändra) button 
-                    //to make input fields disabled and save new values   
-                        listItem.children[0].disabled = true;    
-                        listItem.children[1].disabled = true;                            
-                }   
-           }           
+        buttonChangeContact.addEventListener("click", function(e){         
+            changeContact(e);       
           });
 //-------------------------------------------------------------------------- end of change button listener                      
-    }  
+    }   
 })
+
 //-------------------------------------------------------------------------- end of create button listener   
 
 
+
+//############################ Functions ###################################
+
+//-------------------------------------------------------------------------- 
+// removeAllList function
+//--------------------------------------------------------------------------   
+function removeAllList(){
+    errorMessage.style.display = 'none';
+    ulContactList.innerHTML = '';
+}
+
+//-------------------------------------------------------------------------- 
+// changeContact function
+//-------------------------------------------------------------------------- 
+function changeContact(e){
+
+    errorMessage.style.display = 'none';
+
+    let listItem = e.target.parentNode;
+
+    //if disabled, enable
+    if (listItem.children[0].disabled && listItem.children[1].disabled){
+        //make input fields enabled
+        
+        //buttonChangeContact.innerText = 'Spara';
+        e.target.innerText = 'Spara';
+        listItem.children[0].disabled = false;    
+        listItem.children[1].disabled = false;
+    }
+    // if enabled, disable           
+    else{
+
+        //if contact is empty mark it, if not emty unmark
+        if (listItem.children[0].value.trim() == '' || listItem.children[1].value.trim() == '') {
+            
+            //add a new class 'empty' to mark an emty contact
+            if (listItem.children[0].value.trim() == ''){
+                listItem.children[0].classList.add("empty")
+            }
+            else {
+                listItem.children[0].classList.remove("empty")
+            }
+
+            if (listItem.children[1].value.trim() == ''){
+                listItem.children[1].classList.add("empty")
+            }
+            else{
+                listItem.children[1].classList.remove("empty")
+            }
+            
+            //show an error message
+            errorMessage.innerHTML = 'Får ej spara tom kontakt';
+            errorMessage.style.display = 'block';
+        }
+            
+        else{
+            //buttonChangeContact.innerText = 'Ändra'; 
+            e.target.innerText = 'Ändra'; 
+            //delete class 'empty' 
+            if (listItem.children[0].classList.contains("empty")){
+                listItem.children[0].classList.remove("empty")
+            }
+
+            if (listItem.children[1].classList.contains("empty")){
+                listItem.children[1].classList.remove("empty")
+            }
+
+            //add an event listener for the change (Ändra) button 
+            //to make input fields disabled and save new values   
+                listItem.children[0].disabled = true;    
+                listItem.children[1].disabled = true;                            
+        }   
+    }  
+}
+
+//-------------------------------------------------------------------------- 
+// removeContact function
+//-------------------------------------------------------------------------- 
+function removeContact(e){
+    //get the parent of the delete button(li) 
+    let listItem = e.target.parentNode;
+    if (listItem.children[0].value.trim() == '' || listItem.children[1].value.trim() == '') {
+        errorMessage.style.display = 'none';
+    }
+    listItem.remove();
+}
 
 
 
